@@ -21,14 +21,9 @@ app.use('/api/rooms', roomRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/timeline', timelineRoutes); // Added from friend's push
 
-// Sync Database and Start
 sequelize.sync({ alter: true })
-    .then(() => {
-        console.log('✅ PostgreSQL Connected & Synced (Supabase)');
-        app.listen(PORT, () => {
-            console.log(`🚀 Server running on http://localhost:${PORT}`);
-        });
-    })
-    .catch(err => {
-        console.error('❌ Database Sync Error:', err);
-    });
+    .then(() => console.log('✅ PostgreSQL Connected & Synced'))
+    .catch(err => console.error('❌ Database Sync Error:', err));
+
+// THIS LINE IS REQUIRED FOR VERCEL
+module.exports = app;
